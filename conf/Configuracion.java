@@ -8,6 +8,7 @@ public final class Configuracion{
 	public static final int MEDIO = 2;
 	public static final int EXPER = 3;
 	public static final int HAY_MIN = -1;
+	public static final int HAY_BAN = -2;
 	public static final int CUBIERTO = 1;
 	public static final int DESPEJAD = 0;
 	public static final int JUEGO = 0;

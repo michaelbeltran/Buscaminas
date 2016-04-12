@@ -22,7 +22,7 @@ public class Juego{
 			Configuracion.columnas = 30;
 			Configuracion.cantMinas = 99;
 		}
-		Configuracion.tablero = new int[Configuracion.filas][Configuracion.columnas][2];
+		Configuracion.tablero = new int[Configuracion.filas][Configuracion.columnas][3];
 		Configuracion.minas = new int[Configuracion.cantMinas][2];
 	}
 	public boolean minaExiste(int x, int y){
@@ -90,20 +90,6 @@ public class Juego{
 		else
 			return false;
 	}
-	public void mostrar(int x, int y){
-		int temX, temY;
-		for(int i=0; i<Configuracion.filas; i++){
-			for(int j=0; j<Configuracion.columnas;j++){
-				temX = i*Configuracion.INCREMENTO+i;
-				temY = j*Configuracion.INCREMENTO+j;
-				if(x >= temX && x <= temX+Configuracion.INCREMENTO &&
-					y >= temY && y <= temY+Configuracion.INCREMENTO){
-					despejar(i, j);
-					break;
-				}
-			}
-		}
-	}
 	public void despejar(int x, int y){
 		Configuracion.tablero[x][y][1]=Configuracion.DESPEJAD;
 		if(Configuracion.tablero[x][y][0] == 0){
@@ -133,5 +119,40 @@ public class Juego{
 			}
 		}
 		
+	}
+	public void mostrar(int x, int y){
+		int[] coordenadas = acotar(x,y);
+		int i =coordenadas[0], j = coordenadas[1];
+		despejar(i, j);
+	}
+	public void bandera(int x, int y){
+		int[] coordenadas = acotar(x,y);
+		int i =coordenadas[0], j = coordenadas[1];
+		if(Configuracion.tablero[i][j][2] == Configuracion.HAY_BAN)
+			Configuracion.tablero[i][j][2] = 0;
+		else
+			Configuracion.tablero[i][j][2] = Configuracion.HAY_BAN;
+	}
+	public boolean mina(int x, int y){
+		int[] coordenadas = acotar(x,y);
+		int i =coordenadas[0], j = coordenadas[1];
+		return minaExiste(i,j);
+	}
+	public int[] acotar(int x, int y){
+		int[] coordenadas = new int[2];
+		int temX, temY;
+		for(int i=0; i<Configuracion.filas; i++){
+			for(int j=0; j<Configuracion.columnas;j++){
+				temX = i*Configuracion.INCREMENTO+i;
+				temY = j*Configuracion.INCREMENTO+j;
+				if(x >= temX && x <= temX+Configuracion.INCREMENTO &&
+					y >= temY && y <= temY+Configuracion.INCREMENTO){
+					coordenadas[0] = i;
+					coordenadas[1] = j;
+					return coordenadas;
+				}
+			}
+		}
+		return coordenadas;
 	}
 }

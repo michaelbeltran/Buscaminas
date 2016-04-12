@@ -24,16 +24,22 @@ public class Tablero extends Canvas {
 	private void impTablero(Graphics g){
 		for(int i = 0; i < Configuracion.filas; i++){
 			for(int j = 0; j < Configuracion.columnas; j++){
-				if(Configuracion.tablero[i][j][1] == 0){
+				if(Configuracion.tablero[i][j][1] == Configuracion.DESPEJAD){
 					if(Configuracion.tablero[i][j][0] >= 0){
 						g.drawImage(blanco, i*Configuracion.INCREMENTO+i, 
 									j*Configuracion.INCREMENTO+j, this);
 						g.drawString(Integer.toString(Configuracion.tablero[i][j][0]),
 								i*Configuracion.INCREMENTO+i+5, j*Configuracion.INCREMENTO+j+15);
-					}else{
+					}else if(Configuracion.tablero[i][j][0] == -1){
 						g.drawImage(mina, i*Configuracion.INCREMENTO+i,
 									j*Configuracion.INCREMENTO+j, this);
+					}else if(Configuracion.tablero[i][j][2] == -2){
+						g.drawImage(bandera, i*Configuracion.INCREMENTO+i,
+									j*Configuracion.INCREMENTO+j, this);
 					}
+				}else if(Configuracion.tablero[i][j][2] == -2){
+						g.drawImage(bandera, i*Configuracion.INCREMENTO+i,
+									j*Configuracion.INCREMENTO+j, this);
 				}else{
 					g.drawImage(celda, i*Configuracion.INCREMENTO+i,
 								j*Configuracion.INCREMENTO+j, this);

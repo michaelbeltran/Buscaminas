@@ -9,7 +9,7 @@ import conf.Configuracion;
 
 public class VistaTablero extends JFrame{
 	private Juego juego;
-	private Tablero tablero;
+	private Tablero tablero=null;
 	private JButton bInter;
 	private JButton bMedio;
 	private JButton bExperto;
@@ -37,6 +37,8 @@ public class VistaTablero extends JFrame{
 		bInter = new JButton("8 x 8");
 		bMedio = new JButton("16 x 16");
 		bExperto = new JButton("16 x 30");
+		if(tablero != null)
+			this.remove(tablero);
 		this.add(BorderLayout.WEST, bInter);
 		this.add(BorderLayout.CENTER, bMedio);
 		this.add(BorderLayout.EAST, bExperto);
