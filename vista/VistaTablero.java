@@ -17,6 +17,14 @@ public class VistaTablero extends JFrame{
 		super("Buscaminas");
 	}
 	public void juego(Juego datosJuego, MouseListener l){
+		int w,h;
+		if(System.getProperty("os.name").equals("Windows 7")){
+			w=16;
+			h=38;
+		}else{
+			w=0;
+			h=23;
+		}
 		juego = datosJuego;
 		tablero = new Tablero(juego);
 		tablero.addMouseListener(l);
@@ -27,8 +35,8 @@ public class VistaTablero extends JFrame{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.pack();
 		this.setVisible(true);
-		this.setSize(Configuracion.filas*Configuracion.INCREMENTO+Configuracion.filas, 
-					Configuracion.columnas*Configuracion.INCREMENTO+Configuracion.columnas+23);
+		this.setSize(Configuracion.filas*Configuracion.INCREMENTO+Configuracion.filas+w, 
+					Configuracion.columnas*Configuracion.INCREMENTO+Configuracion.columnas+h);
 	}
 	public void rePintar(){
 		tablero.repaint();
